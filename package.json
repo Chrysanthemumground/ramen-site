@@ -13,6 +13,11 @@
   "engines": {
     "node": "16.x"
   },
+  "resolveLoader": {
+    "modulesDirectories": [
+        "/users/path/a/node_modules"
+    ]
+  },
   "version": "0.1.0",
   "devDependencies": {
     "webpack-dev-server": "3"
