@@ -1,0 +1,37 @@
+<%= form_for @stone do |f| %>
+    <%= f.label :名前 %>
+    <%= f.text_field :name, :size => 140 %> 
+    <%= f.label :ジャンル %>
+    <%= f.text_field :genre, :size => 140 %> 
+    <%= f.label :住所 %>
+    <%= f.text_field :address, :size => 140 %> 
+    <%= f.label :開店時間 %>
+    <%= f.text_field :start_time, :size => 140 %> 
+    <%= f.label :閉店時間 %>
+    <%= f.text_field :end_time, :size => 140 %> 
+    
+    <%= f.label :コメント %>
+    <%= f.text_field :impression, :size => 140 %> 
+    <%= f.label :画像 %>
+    <%= f.text_field :image, :size => 140 %> 
+
+    <h5>総合評価</h5>
+   <div class="post_form">
+    <%= f.radio_button :overall, 5 ,id: 'star1'%>
+    <label for="star1"><span class="text">最高</span>★</label>
+
+    <%= f.radio_button :overall, 4 ,id: 'star2'%>
+    <label for="star2"><span class="text">良い</span>★</label>
+
+    <%= f.radio_button :overall, 3 ,id: 'star3'%>
+    <label for="star3"><span class="text">普通</span>★</label>
+
+    <%= f.radio_button :overall, 2 ,id: 'star4'%>
+    <label for="star4"><span class="text">悪い</span>★</label>
+
+    <%= f.radio_button :overall, 1 ,id: 'star5'%>
+    <label for="star5"><span class="text">最悪</span>★</label>
+ </div>
+
+    <%= f.submit "編集する" %>
+  <% end %>

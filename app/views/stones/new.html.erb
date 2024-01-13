@@ -1,0 +1,75 @@
+<h3>新規投稿ページ</h3>
+<%= form_for @stone do |f| %>
+ 
+    <%= f.label :店名 %>
+    <%= f.text_field :name, :size => 30 %>
+ 
+    <%= f.label :住所 %>
+    <%= f.text_field :address, :size => 30 %>
+ 
+  <div class="field">
+    <%= f.label :ジャンル  %>
+    <%= f.select :genre, 
+    [["醤油", "醤油"], 
+    ["塩", "塩"], 
+    ["味噌", "味噌"],
+    ["とんこつ", "とんこつ"],  
+    ["家系", "家系"], 
+    ["二郎系", "二郎系"],
+    ["油そば", "油そば"],  
+    ["その他", "その他"]], include_blank: "選択して下さい" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :開店時間  %>
+    <%= f.number_field :start_time, :size => 10 %>
+  </div>
+
+  <div class="field">
+  <%= f.label :閉店時間  %>
+  <%= f.number_field :end_time, :size => 10 %>
+</div>
+
+  <div class="field">
+    <%= f.label :コメント  %>
+    <%= f.text_area :impression, :size => "30x2" %>
+  </div>
+
+  <div class="field">
+  <%= f.label :image %>
+  <%= f.file_field :image %>
+</div>
+
+<h5>総合評価</h5>
+   <div class="post_form">
+    <%= f.radio_button :overall, 5 ,id: 'star1'%>
+    <label for="star1"><span class="text">最高</span>★</label>
+
+    <%= f.radio_button :overall, 4 ,id: 'star2'%>
+    <label for="star2"><span class="text">良い</span>★</label>
+
+    <%= f.radio_button :overall, 3 ,id: 'star3'%>
+    <label for="star3"><span class="text">普通</span>★</label>
+
+    <%= f.radio_button :overall, 2 ,id: 'star4'%>
+    <label for="star4"><span class="text">悪い</span>★</label>
+
+    <%= f.radio_button :overall, 1 ,id: 'star5'%>
+    <label for="star5"><span class="text">最悪</span>★</label>
+ </div>
+
+ <div class='form-group'>
+        <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+            <div class='form-check'>
+                <%= tag.label class: 'form-check-label' do %>
+                    <%= tag.check_box class: 'form-check-input' %>
+                    <%= tag.text %>
+                <% end %>
+            </div>
+        <% end %>
+    </div>
+
+  <%= f.submit "投稿する" %>
+<% end %>
+
+<%= link_to "一覧に戻る", stones_path %>

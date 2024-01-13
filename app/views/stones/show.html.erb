@@ -1,0 +1,67 @@
+<h1>ラーメン検索サイト</h1>
+<h3>投稿詳細</h3>
+<div class="stone">
+<%= image_tag @stone.image_url, size: "250x200" if @stone.image? %>
+  <p><%= @stone.name %></p>
+  <p><%= @stone.genre %></p>
+  <p><%= @stone.address %></p>
+  <p><%= @stone.start_time %></p>
+  <p><%= @stone.end_time %></p>
+  <p><%= @stone.impression %></p>
+  <p><%= @stone.created_at %></p>
+</div>
+
+<h2>総合評価：
+<span class="star-rating">
+   <span class="star-rating-front" style="width: <%= getPercent(@stone.overall) %>%;">★★★★★</span>
+   <span class="star-rating-back">★★★★★</span>
+</span> 
+</h2>
+
+<% if user_signed_in? %>
+<% if current_user.already_liked?(@stone) %>
+  <%= button_to stone_like_path(@stone), method: :delete do %>
+    <p>いいねを取り消す</p><%= @stone.likes.count %>
+  <% end %>
+<% else %>
+  <%= button_to stone_likes_path(@stone), method: :post do %>
+    <p>いいね</p><%= @stone.likes.count %>
+  <% end %>
+<% end %>
+<% else %>
+<p>いいねの数 = </p><%= @stone.likes.count %>
+<% end %>
+
+<% @stone.tags.each do |tag| %>
+    <span><%= tag.name %></span>
+<% end %>
+
+<%= link_to "編集する", edit_stone_path(@stone.id) %>
+
+<h2>いいねしたユーザー</h2>
+<% @stone.liked_users.each do |user| %>
+  <li><%= user.email %></li>
+<% end %>
+
+<div class="comment-wrapper">
+  <p>コメント一覧</p>
+  <% @comments.each do |c| %>
+    <div>
+      <%= c.user.email unless c.user.blank? %>
+      <br>
+      <%= c.content %>
+    </div>
+      <br>
+  <% end %>
+
+  <% if user_signed_in? %>
+    <%= form_with(model: [@stone, @comment], local: true) do |f| %>
+      <%= f.text_area :content %>
+      <%= button_tag type: "submit" do %>
+        <i class="far fa-comments"></i> コメントする
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<%= link_to "一覧に戻る", stones_path %>
