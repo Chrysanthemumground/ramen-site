@@ -1,0 +1,22 @@
+databases:
+  - name: ramen site_DB
+    databaseName: ramen_site_db
+    user: ramen site
+    region: singapore
+
+services:
+  - type: web
+    name: ramen site
+    env: ruby
+    region: singapore
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ramen site_DB
+          property: connectionString
+      - key: 2b1f5da81cad02387c1e23ce732aeb5c
+        sync: false
+
