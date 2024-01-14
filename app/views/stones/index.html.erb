@@ -1,4 +1,6 @@
+<div class="top">
 <h1>ラーメン検索サイト</h1>
+</div>
 <h3>一覧ページ</h3>
 
 <h3>投稿を検索</h3>
@@ -49,8 +51,10 @@
     <p>いいねの数 = </p><%= t.likes.count %>
 <% end %>
 
+<% if user_signed_in? %>
     <%= link_to "詳細へ", stone_path(t.id) %>
     <%= link_to "編集する", edit_stone_path(t.id) %>
     <%= button_to "削除する", stone_path(t.id), method: :delete %>
+  <% end %>
   <% end %>
 </div>
