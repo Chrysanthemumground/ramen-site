@@ -15,15 +15,13 @@
   },
   "resolveLoader": {
     "modulesDirectories": [
-        "/users/path/a/node_modules"
+      "/users/path/a/node_modules"
     ]
   },
   "version": "0.1.0",
   "devDependencies": {
     "webpack-dev-server": "3"
   },
-
   "@babel/core": "^7.15.0",
   "babel-loader": "^8.2.2"
-
 }
